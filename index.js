@@ -1,3 +1,5 @@
+const appRouter = require('./Routers/appRouter')
+
 const express = require('express');
 const { resolve } = require('path');
 
@@ -14,3 +16,10 @@ app.use(express.static('static'));
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 // use `prisma` in your application to read and write data in your DB
+
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
+  });
+
+
+  module.exports.app = app;
