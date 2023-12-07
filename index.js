@@ -1,25 +1,31 @@
-const appRouter = require('./Routers/appRouter')
+//Récupération du routeur principal
+import appRouter from './Routers/appRouter.js'
 
-const express = require('express');
-const { resolve } = require('path');
+//Importation Express
+import Express  from 'express';
+import { resolve } from "path";
 
 //Importation Handlebars
-const handlebars = require('handlebars');
+import * as handlebars from 'handlebars'
+
+//Importation Prisma
+import { PrismaClient } from '@prisma/client';
+
 
 //Initialisation Express
-const app = express();
+const app = Express();
 const port = 3010;
 
-app.use(express.static('static'));
+app.use(Express.static('static'));
+app.use(Express.static('public'))
 
-//Import et init Prisma
-const { PrismaClient } = require('@prisma/client')
+
 const prisma = new PrismaClient()
 // use `prisma` in your application to read and write data in your DB
+
+app.use(appRouter);
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
   });
 
-
-  module.exports.app = app;
