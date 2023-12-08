@@ -8,7 +8,7 @@ import { getDirName } from '../Services/utils.js';
 function GetConnexionPage(req,res)
 {
     //PROBLEME : Envoi la page html...mais sans CSS.
-    res.sendFile(resolve(getDirName(import.meta.url), "../remindr/Template/connexion/connexion_page.html"));
+    res.sendFile(path.join(getDirName(import.meta.url), "../remindr/Template/connexion/connexion_page.html"));
     //res.sendFile(resolve(__dirname, "../Template/style/style_connexion.css"));
 
 }
