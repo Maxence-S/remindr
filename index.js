@@ -1,9 +1,12 @@
 //Récupération du routeur principal
 import appRouter from './Routers/appRouter.js'
 
+
 //Importation Express
 import Express  from 'express';
 import { resolve } from "path";
+import path from 'path';
+import { getDirName } from './Services/utils.js';
 
 //Importation Handlebars
 import * as handlebars from 'handlebars'

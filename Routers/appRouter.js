@@ -7,13 +7,12 @@ import path from 'path';
 //import * as appController from '../Controllers/appController.js'
 //import { GetConnexionPageCSS } from '../Controllers/appController.js';
 import GetConnexionPage  from '../Controllers/appController.js';
+import { GetRegister } from '../Controllers/appController.js';
 
 const appRouter = Router();
 
 appRouter.get("/",GetConnexionPage)
-
-//Pas utilisée - ne fonctionne pas
-//appRouter.get("/",GetConnexionPageCSS)
+appRouter.get("/register.html",GetRegister)
 
 
 export default appRouter;

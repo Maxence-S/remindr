@@ -20,7 +20,7 @@ model User {
 
 }
 
-model Group {
+model Groups {
   G_id Int @id @default(autoincrement())
   name String @unique
   Users UsersInGroup[]
@@ -32,13 +32,13 @@ model Reminder {
   name String
   description String
   dueDate DateTime
-  Users   Group @relation(fields: [GroupId], references: [G_id])
+  Users   Groups @relation(fields: [GroupId], references: [G_id])
   GroupId Int
 }
 
 model UsersInGroup {
   @@id(name: "idUser_Group", fields: [idUser, idGroup])
-  Groups  Group @relation(fields: [idGroup], references: [G_id])
+  Groups  Groups @relation(fields: [idGroup], references: [G_id])
   Users   User @relation(fields: [idUser], references: [U_id])
   idUser Int
   idGroup Int
