@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/style/index_style.css">
+</head>
+
+<body>
+    <div class="entete">
+        <iframe src="/entete.html" width="600" height="400"></iframe>
+    </div>
+
+    <div class="conteneur-groupes-rappel">
+       
+        <div class="groupes_main">
+            <h1>Vos principaux groupes</h1>
+            <div class="container">
+            <div class="Groupes"> 
+                <div class="titre"><h3>Groupe 1</h3></div>
+                <div class="description"> C'est le groupe 1</div>
+                <br>
+                </div>
+            <div class="Groupes"> 
+                <div class="titre"><h3>Groupe 2</h3></div>
+                <div class="description"> C'est le groupe 2</div>
+                <br>
+            </div>
+            <div class="Groupes"> 
+                <div class="titre"><h3>Groupe 3</h3></div>
+                <div class="description"> C'est le groupe 3</div>
+                <br>
+            </div>
+            <div class="Groupes"> 
+                <div class="titre"><h3>Groupe 4</h3></div>
+                <div class="description"> C'est le groupe 4</div>
+                <br>
+            </div>
+        </div>
+        </div>
+
+        <div class="rappel_main">
+            <h1>Rappel à échéance</h1>
+            <div class="container">
+                <div class="Groupes">
+                    <div class="titre">Faire la vaisselle</div>
+                    <div class="assigné"> Assigner au groupe 2 <br><br></div>
+                    <div class="date">Date: 12/14/23</div>
+                    <div class="heure">Heure début : 18h30</div>
+                    <div class="duree">Durée estimée : 50 minutes</div>
+                    <div class="description">Description : <br>Faire la vaisselle pour que tout soit propre</div>
+                </div>
+        
+                <!-- Deux tickets supplémentaires -->
+                <div class="Groupes">
+                    <div class="titre">Faire les courses</div>
+                    <div class="assigné"> Assigner au groupe 1 <br><br></div>
+                    <div class="date">Date: 12/14/23</div>
+                    <div class="heure">Heure début : 10h00</div>
+                    <div class="duree">Durée estimée : 1 heure</div>
+                    <div class="description">Description : <br>Acheter des produits alimentaires et ménagers</div>
+                </div>
+        
+                <div class="Groupes">
+                    <div class="titre">Rendez-vous chez le médecin</div>
+                    <div class="assigné"> Assigner au groupe 1 <br><br></div>
+                    <div class="date">Date: 12/14/23</div>
+                    <div class="heure">Heure début : 14h45</div>
+                    <div class="duree">Durée estimée : 30 minutes</div>
+                    <div class="description">Description : <br>Consultation médicale pour un suivi de santé</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.entete').load('entete.html');
+        });
+    </script>
+</body>
+</html>

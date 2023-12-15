@@ -1,0 +1,204 @@
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    padding-top: 200px;
+    text-align: center;
+}
+head{
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+.entete {
+    width: 100%; /* Pour occuper toute la largeur */
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Alignement horizontal */
+    gap: 20px; /* Espacement entre les tickets */
+    margin: 0 auto; /* Centrer le contenu */
+    max-width: 1200px; /* Largeur maximale du contenu */
+    padding: 20px; /* Espacement intérieur */
+}
+
+.Groupes {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    flex: 1 0 calc(45% - 20px);
+    max-width: calc(50% - 20px);
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .Groupes {
+        flex-basis: calc(100% - 20px);
+        max-width: calc(100% - 20px);
+    }
+}
+
+/* Nouveau style pour le titre */
+.titre {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+button{
+    color: white;
+    float:right;
+    width: 150px;
+    height: 40px;
+    font-size: 15px;
+    background-color: #770000ce;
+    border-radius: 20px;
+    box-shadow: 1px 2px 2px rgb(0, 0, 0);
+}
+
+.conteneur-groupes-rappel {
+    display: flex;
+    justify-content: space-between;
+
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+/* Style pour le groupe */
+.groupes_main {
+    margin-right: 10px;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    flex: 1 0 calc(45% - 20px);
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+/* Style pour le rappel */
+.rappel_main {
+    margin-left: 10px;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    flex: 1 0 calc(45% - 20px);
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .groupes_main,
+    .rappel_main {
+        flex-basis: calc(100% - 20px);
+        max-width: calc(100% - 20px);
+    }
+}
+/* Style pour la fenêtre modale */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+.modal-content {
+    
+    background-color: #f0f0f0;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    width: 20%;
+    margin-top: 5%;   
+    margin-bottom: 5%;
+
+}
+
+
+/* Style pour le bouton de fermeture de la fenêtre modale */
+.close {
+    float: right;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.buttondiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px; /* Ajustez la hauteur selon vos besoins */
+    background-color: #f2f2f2; /* Couleur de fond pour l'en-tête */
+}
+
+#creerTicketBtn {
+    color: white;
+    width: 150px;
+    height: 40px;
+    font-size: 15px;
+    background-color: #007710ce;
+    border-radius: 20px;
+    box-shadow: 1px 2px 2px rgb(0, 0, 0);
+}
+/* Style pour le titre "Créer un nouveau ticket" */
+h2 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+/* Style pour les champs de saisie */
+input[type="text"],
+input[type="number"],
+textarea,
+input[type="color"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Style pour le champ de sélection de couleur */
+.choix-couleur {
+    margin-bottom: 20px;
+}
+
+/* Style pour la description */
+textarea {
+    height: 100px;
+}
+/* Style pour les éléments de la classe .titre, .assigné, .date, .heure, .duree, .description */
+.titre_pop,
+.assigné_pop,
+.date_pop,
+.heure_pop,
+.duree_pop,
+.description_pop {
+    margin-bottom: 15px;
+}

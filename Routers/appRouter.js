@@ -1,18 +1,33 @@
 import { Router } from 'express';
-import Express  from 'express';
-import { resolve } from "path";
-import { fileURLToPath } from 'url';
-import path from 'path';
+import bodyParser from 'body-parser';
 
-//import * as appController from '../Controllers/appController.js'
-//import { GetConnexionPageCSS } from '../Controllers/appController.js';
-import GetConnexionPage  from '../Controllers/appController.js';
-import { GetRegister } from '../Controllers/appController.js';
+import { GetLoginPage,GetRegisterPage, GetDashboardPage, GetGroupsPage, GetRemindersPage, TryLogin,TryRegister, Logout } from '../Controllers/appController.js';
+
 
 const appRouter = Router();
 
-appRouter.get("/",GetConnexionPage)
-appRouter.get("/register.html",GetRegister)
+var urlencodedParser = bodyParser.urlencoded({ extended: false })   //Middleware bodyParser --> A mettre dans un fichiers bodyParser.js et l'importer ici
+
+//Routes menant aux principales pages
+appRouter.get("/",GetLoginPage)                 //Page de connexion. C'est la page de base sur lequel l'utilisateur tombe.
+
+appRouter.get("/register.html",GetRegisterPage) //Page d'inscription.
+
+appRouter.get('/dashboard',GetDashboardPage)    //Page d'accueil
+
+appRouter.get('/groups', GetGroupsPage)         //Page listant les groupes de l'utilisateur
+
+appRouter.get('/reminders', GetRemindersPage)   //Page listant les rappels de l'utilisateur
+
+//Envoi des formulaires (inscription, connexion, création de groupe ou de rappel)
+appRouter.post('/login',urlencodedParser,TryLogin)
+
+appRouter.post('/register',urlencodedParser,TryRegister)
+
+
+
+//Permet la fin de session et la déconnexion
+appRouter.get('/logout',Logout)
 
 
 export default appRouter;

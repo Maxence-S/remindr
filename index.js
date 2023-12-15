@@ -2,14 +2,9 @@
 import appRouter from './Routers/appRouter.js'
 
 
-//Importation Express
 import Express  from 'express';
-import { resolve } from "path";
-import path from 'path';
-import { getDirName } from './Services/utils.js';
-
-//Importation Handlebars
-import * as handlebars from 'handlebars'
+import session from 'express-session';
+import Handlebars from 'handlebars';
 
 //Importation Prisma
 import { PrismaClient } from '@prisma/client';
@@ -19,14 +14,27 @@ import { PrismaClient } from '@prisma/client';
 const app = Express();
 const port = 3010;
 
-app.use(Express.static('static'));
 app.use(Express.static('public'))
 
+//Initialisation Handlebars
+// Handlebars.create({
+//   layoutsDir: resolve(__dirname, 'Template'), // Chemin des layouts à suivre
+//   defaultLayout: false, // Définissez à false pour désactiver les mises en page
+//   extname: '.hbs',
+//   /* autres options de configuration */
+// });
 
+//Initialisation prisma
 const prisma = new PrismaClient()
-// use `prisma` in your application to read and write data in your DB
+
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true
+}));
 
 app.use(appRouter);
+
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);

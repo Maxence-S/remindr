@@ -9,6 +9,16 @@ const getDirName = function (moduleUrl) {
     return path.dirname(__dirname)
 }
 
+class CustomError extends Error {
+    constructor(code, message) {
+        super(message);
+        this.name = 'CustomError';
+        this.code = code; // Entier associé à l'erreur
+    }
+}
+
+
 export {
-    getDirName
+    getDirName,
+    CustomError
 }

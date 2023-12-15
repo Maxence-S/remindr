@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Rappels</title>
+    <link rel="stylesheet" href="/style/index_style.css">
+</head>
+<body>
+    <div class="entete">
+    </div>
+  
+        
+    <h1>Vos rappel</h1>
+    <div class="buttondiv">
+        <button id="creerTicketBtn">Créer un ticket</button>
+    </div>
+    
+    <div class="container">
+        <div class="Groupes" style="border: 2px solid #d81212;">
+            <div class="titre">Faire la vaisselle </div>
+            <div class="assigné"> Assigner au groupe 2 <br><br></div>
+            <div class="date">Date: 12/14/23</div>
+            <div class="heure">Heure début : 18h30</div>
+            <div class="duree">Durée estimée : 50 minutes</div>
+            <div class="description">Description : <br>Faire la vaisselle pour que tout soit propre</div>
+        </div>
+        
+        <div class="Groupes" style="border: 2px solid #40d812;">
+            <div class="titre">Faire les courses </div>
+            <div class="assigné"> Assigner au groupe 1 <br><br></div>
+            <div class="date">Date: 12/14/23</div>
+            <div class="heure">Heure début : 10h00</div>
+            <div class="duree">Durée estimée : 1 heure</div>
+            <div class="description">Description : <br>Acheter des produits alimentaires et ménagers</div>
+        </div>
+
+        <div class="Groupes" style="border: 2px solid #1247d8;">
+            <div class="titre">Rendez-vous chez le médecin </div>
+            <div class="assigné"> Assigner au groupe 1 <br><br></div>
+            <div class="date">Date: 12/14/23</div>
+            <div class="heure">Heure début : 14h45</div>
+            <div class="duree">Durée estimée : 30 minutes</div>
+            <div class="description">Description : <br>Consultation médicale pour un suivi de santé</div>
+        </div>
+
+        <div class="Groupes" style="border: 2px solid #d8c412;">
+            <div class="titre">Nettoyer la chambre</div>
+            <div class="assigné"> Assigner au groupe 1 <br><br></div>
+            <div class="date">Date: 12/15/23</div>
+            <div class="heure">Heure début : 11h00</div>
+            <div class="duree">Durée estimée : 40 minutes</div>
+            <div class="description">Description : <br>Ranger et nettoyer la chambre</div>
+        </div>
+
+        <div class="Groupes" style="border: 2px solid #ffa5f7;">
+            <div class="titre">Réunion d'équipe </div>
+            <div class="assigné"> Assigner au groupe 2 <br><br></div>
+            <div class="date">Date: 12/16/23</div>
+            <div class="heure">Heure début : 15h30</div>
+            <div class="duree">Durée estimée : 1 heure</div>
+            <div class="description">Description : <br>Réunion pour discuter des projets en cours</div>
+        </div>
+    </div>
+    <div class="modal" id="ticketModal">
+        <div class="modal-content">
+            <!-- Contenu de la fenêtre modale pour créer un ticket -->
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Créer un nouveau ticket</h2>
+            <div class="titre_pop">
+                <input type="text" placeholder="Titre du rappel" />
+            </div>
+            <div class="assigné_pop">
+                Assigner au groupe <input type="number" placeholder="Numéro du groupe" /><br><br>
+            </div>
+            <div class="date_pop">
+                Date: <input type="text" placeholder="Date" />
+            </div>
+            <div class="heure_pop">
+                Heure début : <input type="text" placeholder="Heure de début" />
+            </div>
+            <div class="duree_pop">
+                Durée estimée : <input type="text" placeholder="Durée estimée" />
+            </div>
+            <div class="description_pop">
+                Description : <br><textarea placeholder="Description"></textarea>
+            </div>
+            
+            <!-- Ajout d'un champ pour choisir la couleur de la bordure -->
+            <div class="choix-couleur">
+                <label for="couleur-bordure">Couleur de la bordure :</label>
+                <input type="color" id="couleur-bordure" name="couleur-bordure" value="#ffa5f7">
+            </div>
+        </div>
+    </div>
+    <script>// Récupérer les références aux éléments HTML
+        const creerTicketBtn = document.getElementById('creerTicketBtn');
+        const ticketModal = document.getElementById('ticketModal');
+        const closeModal = document.getElementById('closeModal');
+        
+        // Événement click sur le bouton "Créer un ticket"
+        creerTicketBtn.addEventListener('click', function() {
+            ticketModal.style.display = 'block';
+        });
+        
+        // Événement click sur le bouton de fermeture de la fenêtre modale
+        closeModal.addEventListener('click', function() {
+            ticketModal.style.display = 'none';
+        });
+        
+        // Événement pour fermer la fenêtre modale en cliquant en dehors de celle-ci
+        window.addEventListener('click', function(event) {
+            if (event.target == ticketModal) {
+                ticketModal.style.display = 'none';
+            }
+        });
+        </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.entete').load('entete.html');
+        });
+    </script>
+</div>
+
+</body>
+</html>
