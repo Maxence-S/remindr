@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupes</title>
+    <link rel="stylesheet" href="/style/index_style.css">
+</head>
+
+<body>
+    <div class="entete">
+    </div>
+
+
+    <h1>Rappel Groupe 1</h1>
+
+    <div class="buttondiv">
+        <button id="creerTicketBtn">Créer un rappel</button>
+    </div>
+    <div class="buttondiv">
+        <button id="addUserBtn">Ajouter un utilisateur</button>
+    </div>
+
+    <div class="container">
+
+        <div class="Groupes" style="border: 2px solid #40d812;">
+            <div class="titre">Faire les courses </div>
+            <div class="assigné"> Assigner au groupe 1 <br><br></div>
+            <div class="date">Date: 12/14/23</div>
+            <div class="heure">Heure début : 10h00</div>
+            <div class="duree">Durée estimée : 1 heure</div>
+            <div class="description">Description : <br>Acheter des produits alimentaires et ménagers</div>
+        </div>
+
+        <div class="Groupes" style="border: 2px solid #1247d8;">
+            <div class="titre">Rendez-vous chez le médecin </div>
+            <div class="assigné"> Assigner au groupe 1 <br><br></div>
+            <div class="date">Date: 12/14/23</div>
+            <div class="heure">Heure début : 14h45</div>
+            <div class="duree">Durée estimée : 30 minutes</div>
+            <div class="description">Description : <br>Consultation médicale pour un suivi de santé</div>
+        </div>
+
+        <div class="Groupes" style="border: 2px solid #d8c412;">
+            <div class="titre">Nettoyer la chambre</div>
+            <div class="assigné"> Assigner au groupe 1 <br><br></div>
+            <div class="date">Date: 12/15/23</div>
+            <div class="heure">Heure début : 11h00</div>
+            <div class="duree">Durée estimée : 40 minutes</div>
+            <div class="description">Description : <br>Ranger et nettoyer la chambre</div>
+        </div>
+
+    </div>
+    <div class="modal" id="ticketModal">
+        <div class="modal-content">
+            <!-- Contenu de la fenêtre modale pour créer un ticket -->
+            <span class="close" id="closeModal_Ticket">&times;</span>
+            <h2>Créer un nouveau rappel</h2>
+            <br>
+            <form action="/createReminder" method="post" class="formulaire" id="formulaire">
+                Titre :<br>
+                <input type="text" name="title" placeholder="Travail à rendre" class="titre_pop" required><br><br>
+                Date d'écheance :<br>
+                <input type="datetime-local" name="datetime" class="date_pop" required><br><br>
+                <!-- Heure d'écheance :<br>
+                <input type="time" name="time" class="heure_pop" required><br><br> -->
+                Description :<br>
+                <input type="text" name="desciption" placeholder="Rendu du projet." class="titre_pop" required><br><br>
+                Couleur :<br>
+                <input type="color" name="color" class="form-elem" required><br><br>
+                <input type="hidden" name="groupName" value="">
+                <input type="submit" value="créer" id="validButton">
+            </form>
+        </div>
+    </div>
+    <div class="modal" id="userModal">
+        <div class="modal-content">
+            <!-- Contenu de la fenêtre modale pour créer un ticket -->
+            <span class="close" id="closeModal_User">&times;</span>
+            <h2>Ajouter un utilisateur</h2>
+            <br>
+            <form action="/addUser" method="post" class="formulaire">
+                Email:<br>
+                <input type="email" name="email" placeholder="user@mail.com" class="email_pop" required><br><br>
+                <input type="hidden" name="groupName" value="">
+                <input type="submit" value="ajouter" id="validButton">
+            </form>
+        </div>
+    </div>
+    <script>// Récupérer les références aux éléments HTML
+        const creerTicketBtn = document.getElementById('creerTicketBtn');
+        const addUserBtn = document.getElementById('addUserBtn');
+        const ticketModal = document.getElementById('ticketModal');
+        const userModal = document.getElementById('userModal');
+        const closeModalT = document.getElementById('closeModal_Ticket');
+        const closeModalU = document.getElementById('closeModal_User')
+
+        // Événement click sur le bouton "Créer un ticket"
+        creerTicketBtn.addEventListener('click', function () {
+            ticketModal.style.display = 'block';
+        });
+
+        // Événement click sur le bouton "Ajouter un utilisateur"
+        addUserBtn.addEventListener('click', function () {
+            userModal.style.display = 'block';
+        });
+
+        // Événement click sur le bouton de fermeture de la fenêtre modale
+        closeModalT.addEventListener('click', function () {
+            ticketModal.style.display = 'none';
+
+        });
+        closeModalU.addEventListener('click', function () {
+            userModal.style.display = 'none';
+
+        });
+
+        // Événement pour fermer la fenêtre modale en cliquant en dehors de celle-ci
+        window.addEventListener('click', function (event) {
+            if (event.target == ticketModal) {
+                ticketModal.style.display = 'none';
+            }
+            else if (event.target == userModal) {
+                userModal.style.display = 'none';
+            }
+        });
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.entete').load('/entete.html');
+        });
+    </script>
+    </div>
+
+</body>
+
+</html>

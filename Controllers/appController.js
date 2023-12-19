@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 
 import { getDirName } from '../Services/utils.js';
 import { RegisterMid, LoginMid } from '../Middlewares/login_register.js';
-import { AddGroupMid } from '../Middlewares/groups_middlewares.js';
+import { AddGroupMid, AddUserMid } from '../Middlewares/groups_middlewares.js';
 import { UserConnected } from '../Middlewares/isConnected.js';
 
 const prisma = new PrismaClient()
@@ -139,10 +139,42 @@ function TryAddGroup(req, res) {
         // Formulaire incomplet
       }
       else if (error.code === 2) {
-        // Nom de groupe déjà utilisé
+        // Utilisateur non connecté
+        res.redirect('/');
+      }
+      else if (error.code === 3) {
+        // Groupe déjà existant
+      }
+      else if (error.code === 4) {
+        // Erreur avec le groupe ou l'ajout du créateur dans le groupe
       }
 
     })
+}
+
+function TryAddUserInGroup(req,res) {
+  AddUserMid(req,res)
+  .then((groupUpdated) => {
+    console.log(groupUpdated);
+    res.redirect('/groups/' + groupUpdated.name);
+  })
+  .catch((error) => {
+    console.log(error);
+
+    if (error.code === 1) {
+      // Formulaire incomplet
+    }
+    else if (error.code === 2) {
+      // Utilisateur non connecté
+      res.redirect('/');
+    }
+    else if (error.code === 3) {
+      // Utilisateur inexistant
+    }
+    else if (error.code === 4) {
+      // Erreur avec le groupe
+    }
+  })
 }
 
 
@@ -172,5 +204,6 @@ export {
   TryLogin,
   TryRegister,
   TryAddGroup,
+  TryAddUserInGroup,
   Logout
 }

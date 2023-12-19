@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { GetLoginPage,GetRegisterPage, GetDashboardPage, GetAllGroupsPage, GetRemindersPage, TryLogin,TryRegister, TryAddGroup, Logout } from '../Controllers/appController.js';
+import { GetLoginPage,GetRegisterPage, GetDashboardPage, GetRemindersPage, TryLogin,TryRegister, TryAddGroup, TryAddUserInGroup, Logout } from '../Controllers/appController.js';
 import { urlencodedParser } from '../Middlewares/bodyparser.js';
 
 const appRouter = Router();
@@ -27,7 +27,7 @@ appRouter.post('/register',urlencodedParser,TryRegister)
 
 appRouter.post('/addGroup',urlencodedParser,TryAddGroup)
 
-
+appRouter.post('/addUser', urlencodedParser,TryAddUserInGroup)
 
 //Permet la fin de session et la déconnexion
 appRouter.get('/logout',Logout)
