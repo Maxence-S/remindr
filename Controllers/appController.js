@@ -1,13 +1,15 @@
 import path from 'path';
-import session from 'express-session';
 import { PrismaClient } from '@prisma/client';
 
 import { getDirName } from '../Services/utils.js';
 import { RegisterMid, LoginMid } from '../Middlewares/login_register.js';
+import { AddGroupMid } from '../Middlewares/groups_middlewares.js';
 import { UserConnected } from '../Middlewares/isConnected.js';
 
 const prisma = new PrismaClient()
 
+
+//Fonction des pages inscription et connexion
 function GetLoginPage(req, res) {
   res.sendFile(path.join(getDirName(import.meta.url), "../remindr/Template/connexion/connexion_page.html"));
 }
@@ -15,6 +17,9 @@ function GetLoginPage(req, res) {
 function GetRegisterPage(req, res) {
   res.sendFile(path.join(getDirName(import.meta.url), "../remindr/Template/connexion/register.html"));
 }
+
+
+//Fonction des pages après connexion (dashboard, liste des groupes, liste des rappels)
 
 function GetDashboardPage(req, res) {
   UserConnected(req,res)
@@ -29,7 +34,8 @@ function GetDashboardPage(req, res) {
 
 }
 
-function GetGroupsPage(req, res) {
+
+function GetAllGroupsPage(req, res) {
   UserConnected(req,res)
   .then((user) => {
     res.sendFile(path.join(getDirName(import.meta.url), "../remindr/Template/groupes.html"));
@@ -41,6 +47,7 @@ function GetGroupsPage(req, res) {
   })
 }
 
+
 function GetRemindersPage(req, res) {
   UserConnected(req,res)
   .then((user) => {
@@ -48,7 +55,7 @@ function GetRemindersPage(req, res) {
   })
 
   .catch((error) => {
-    console.log("Page reminders : " + error);
+    console.log("Page rappels : " + error);
     res.redirect('/')
   })
 }
@@ -56,6 +63,23 @@ function GetRemindersPage(req, res) {
 // function GetOtherPage(req, res) {
 //   res.sendFile(path.join(getDirName(import.meta.url), "../remindr/Template/others.html"));
 // }
+
+
+function GetSingleGroupPage(req,res) {
+  UserConnected(req,res)
+  .then((user) => {
+    res.sendFile(path.join(getDirName(import.meta.url), "../remindr/Template/one_group.html"));
+  })
+
+  .catch((error) => {
+    console.log("Page d'un groupe unique : " + error);
+    res.redirect('/')
+  })
+}
+
+
+
+//Fonction permettant l'ajout de groupes, la connexion et l'inscription
 
 function TryLogin(req, res) {
   LoginMid(req, res)
@@ -101,7 +125,28 @@ function TryRegister(req, res) {
     })
 }
 
+function TryAddGroup(req, res) {
 
+  AddGroupMid(req, res)
+    .then((newGroup) => {
+      console.log(newGroup);
+      res.redirect('/dashboard');
+    })
+    .catch((error) => {
+      console.log(error);
+
+      if (error.code === 1) {
+        // Formulaire incomplet
+      }
+      else if (error.code === 2) {
+        // Nom de groupe déjà utilisé
+      }
+
+    })
+}
+
+
+//Fonctions permettant de se déconnecter
 function Logout(req, res) {
   req.session.destroy((err) => {
     if (err) {
@@ -113,18 +158,19 @@ function Logout(req, res) {
     }
   })
 }
-// export const GetLogin = GetLoginPage 
-// export const GetRegister = GetRegisterPage
-// export const TryLoginFunction = TryLogin
-// export const TryRegisterFunction = TryRegister
+
+
+// EXPORTS //
 
 export {
   GetLoginPage,
   GetRegisterPage,
   GetDashboardPage,
-  GetGroupsPage,
+  GetAllGroupsPage,
+  GetSingleGroupPage,
   GetRemindersPage,
   TryLogin,
   TryRegister,
+  TryAddGroup,
   Logout
 }

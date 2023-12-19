@@ -1,14 +1,16 @@
 //Récupération du routeur principal
 import appRouter from './Routers/appRouter.js'
 
+import { getDirName } from './Services/utils.js';
+
 
 import Express  from 'express';
+import { resolve } from 'path';
 import session from 'express-session';
-import Handlebars from 'handlebars';
+import Handlebars from 'express-handlebars';
 
 //Importation Prisma
 import { PrismaClient } from '@prisma/client';
-
 
 //Initialisation Express
 const app = Express();
@@ -17,12 +19,16 @@ const port = 3010;
 app.use(Express.static('public'))
 
 //Initialisation Handlebars
-// Handlebars.create({
-//   layoutsDir: resolve(__dirname, 'Template'), // Chemin des layouts à suivre
-//   defaultLayout: false, // Définissez à false pour désactiver les mises en page
-//   extname: '.hbs',
-//   /* autres options de configuration */
-// });
+const hbs = Handlebars.create({
+  layoutsDir: resolve(getDirName(import.meta.url), 'Template'), // Chemin des layouts à suivre
+  defaultLayout: false, // Définissez à false pour désactiver les mises en page
+  extname: '.hbs',
+});
+
+app.set('views', resolve(getDirName(import.meta.url), 'remindr/Template'));
+
+app.engine('.hbs', hbs.engine);
+app.set('view engine', '.hbs');
 
 //Initialisation prisma
 const prisma = new PrismaClient()

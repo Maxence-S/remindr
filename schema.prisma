@@ -38,8 +38,8 @@ model Reminder {
 
 model UsersInGroup {
   @@id(name: "idUser_Group", fields: [idUser, idGroup])
-  Groups  Groups @relation(fields: [idGroup], references: [G_id])
-  Users   User @relation(fields: [idUser], references: [U_id])
+  ref_Groups  Groups @relation(fields: [idGroup], references: [G_id])
+  ref_Users   User @relation(fields: [idUser], references: [U_id])
   idUser Int
   idGroup Int
 }
