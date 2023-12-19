@@ -73,47 +73,12 @@
             </div>
         </div>
     </div>
-    <div class="buttondiv">
-        <button id="creerTicketBtn">Créer un groupe</button>
-    </div>
-    <div class="modal" id="ticketModal">
-        <div class="modal-content">
-            <!-- Contenu de la fenêtre modale pour créer un ticket -->
-            <span class="close" id="closeModal">&times;</span>
-            <h2>Créer un nouveau groupe</h2>
-            <form action="/addGroup" method="post" class="formulaire">
-                <input type="text" name="groupName" placeholder="Nom du groupe" />
-            <input type="submit" value="login" id="creerTicketBtn">
-            </form>
-        </div>
-    </div>
-    <script>// Récupérer les références aux éléments HTML
-        const creerTicketBtn = document.getElementById('creerTicketBtn');
-        const ticketModal = document.getElementById('ticketModal');
-        const closeModal = document.getElementById('closeModal');
-        
-        // Événement click sur le bouton "Créer un ticket"
-        creerTicketBtn.addEventListener('click', function() {
-            ticketModal.style.display = 'block';
-        });
-        
-        // Événement click sur le bouton de fermeture de la fenêtre modale
-        closeModal.addEventListener('click', function() {
-            ticketModal.style.display = 'none';
-        });
-        
-        // Événement pour fermer la fenêtre modale en cliquant en dehors de celle-ci
-        window.addEventListener('click', function(event) {
-            if (event.target == ticketModal) {
-                ticketModal.style.display = 'none';
-            }
-        });
-    </script>
+    
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('.entete').load('entete.html');
+            $('.entete').load('/entete.html');
         });
     </script>
 </body>

@@ -155,7 +155,7 @@ button{
     background-color: #f2f2f2; /* Couleur de fond pour l'en-tête */
 }
 
-#creerTicketBtn {
+#creerTicketBtn, #addUserBtn, #validButton, #creerGroupBtn {
     color: white;
     width: 150px;
     height: 40px;
@@ -173,6 +173,11 @@ h2 {
 
 /* Style pour les champs de saisie */
 input[type="text"],
+input[type="textarea"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="time"],
+input[type="email"],
 input[type="number"],
 textarea,
 input[type="color"] {
@@ -195,6 +200,7 @@ textarea {
 }
 /* Style pour les éléments de la classe .titre, .assigné, .date, .heure, .duree, .description */
 .titre_pop,
+.form_pop,
 .assigné_pop,
 .date_pop,
 .heure_pop,

@@ -1,5 +1,6 @@
 //Récupération du routeur principal
 import appRouter from './Routers/appRouter.js'
+import groupRouter from './Routers/groupRouter.js';
 
 import { getDirName } from './Services/utils.js';
 
@@ -40,6 +41,7 @@ app.use(session({
 }));
 
 app.use(appRouter);
+app.use('/groups',groupRouter);
 
 
 app.listen(port, () => {
