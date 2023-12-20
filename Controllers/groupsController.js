@@ -42,19 +42,18 @@ function GetSingleGroupPage(req, res) {
                     const NameGroup = req.params.groupName
 
                     const group = await prisma.groups.findUnique({
-                        where: { name: NameGroup},
+                        where: { name: NameGroup },
                     })
 
                     const Reminders = await prisma.reminder.findMany({
                         where: { GroupId: group.G_id },
                         orderBy: [
-                          {
-                            DueDate: 'asc',
-                          },
+                            {
+                                DueDate: 'asc',
+                            },
                         ],
                     });
-
-                    res.render('one_group', { NameGroup });
+                    res.render('one_group', { NameGroup, Reminders });
                 })
                 .catch((error) => {
                     console.log("Page du groupe '" + req.params.groupName + "' : " + error);
@@ -76,7 +75,7 @@ function TryAddGroup(req, res) {
 
     AddGroup(req, res)
         .then((newGroup) => {
-            res.redirect('/dashboard');
+            res.redirect('/groups/' + newGroup.name);
         })
         .catch((error) => {
             console.log(error);

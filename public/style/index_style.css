@@ -7,6 +7,9 @@ h1{
     padding-top: 200px;
     text-align: center;
 }
+h3 {
+    text-align: center;
+}
 head{
     margin: 0;
     padding: 0;
@@ -40,6 +43,7 @@ body {
     max-width: calc(50% - 20px);
     box-sizing: border-box;
     margin-bottom: 20px;
+
 }
 
 @media (max-width: 768px) {
@@ -49,7 +53,12 @@ body {
     }
 }
 
-/* Nouveau style pour le titre */
+a {
+    text-decoration: none;
+    color:#000
+}
+
+
 .titre {
     font-weight: bold;
     font-size: 18px;

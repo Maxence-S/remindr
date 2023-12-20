@@ -32,7 +32,7 @@ model Reminder {
   GroupId     Int
   Name        String
   Description String
-  DueDate     DateTime
+  DueDate     String
   Color       String
   R_Group     Groups @relation("G_Rappels",fields: [GroupId], references: [G_id])
 

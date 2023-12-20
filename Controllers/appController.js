@@ -9,11 +9,12 @@ import { CreateReminder } from '../Middlewares/reminder_middleware.js';
 const prisma = new PrismaClient()
 
 
-//Fonction des pages inscription et connexion
+//Fonction permettant de récupérer la page de connexion
 function GetLoginPage(req, res) {
   res.sendFile(path.join(getDirName(import.meta.url), "../remindr/Template/connexion/connexion_page.html"));
 }
 
+//Fonction permettant de récupérer la page d'inscription
 function GetRegisterPage(req, res) {
   res.sendFile(path.join(getDirName(import.meta.url), "../remindr/Template/connexion/register.html"));
 }
@@ -24,12 +25,24 @@ function GetRegisterPage(req, res) {
 //Fonction envoyant la page principale
 function GetDashboardPage(req, res) {
   UserConnected(req, res)
-    .then((user) => {
+    .then(async (user) => {
 
       const pseudo = user.pseudo;
       const email = user.email;
 
-      res.render('dashboard', { pseudo, email });
+      const User = await prisma.user.findUnique({
+        where: { email },
+        include: {
+          U_Groups: {
+            select: { name: true, Reminders: true },
+            take: 6,
+          }
+        },
+      });
+
+      const groupsOfuser = User.U_Groups.map(Groups => Groups.name);
+      const FirstsReminders = User.U_Groups.Reminders; //Marche pas pour l'instant
+      res.render('dashboard', { pseudo, email, groupsOfuser, FirstsReminders });
     })
 
     .catch((error) => {
@@ -39,6 +52,7 @@ function GetDashboardPage(req, res) {
 
 }
 
+//Fonction permettant d'afficher la page des rappels de l'utilisateur
 function GetRemindersPage(req, res) {
   UserConnected(req, res)
     .then((user) => {
@@ -50,11 +64,6 @@ function GetRemindersPage(req, res) {
       res.redirect('/')
     })
 }
-
-  // function GetOtherPage(req, res) {
-  //   res.sendFile(path.join(getDirName(import.meta.url), "../remindr/Template/others.html"));
-  // }
-
 
 
 //Fonction permettant la connexion d'un utilisateur
@@ -104,15 +113,13 @@ function TryRegister(req, res) {
     })
 }
 
-
-function TryAddReminder(req,res)
-{
-  CreateReminder(req,res)
+//Fonction permettant d'ajouter un rappel
+function TryAddReminder(req, res) {
+  CreateReminder(req, res)
     .then((group) => {
-      res.redirect('/groups/'+ group.name);
+      res.redirect('/groups/' + group.name);
     })
-    .catch((error) =>
-    {
+    .catch((error) => {
       console.log(error);
 
       if (error.code === 1) {

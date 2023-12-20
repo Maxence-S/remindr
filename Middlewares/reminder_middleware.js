@@ -18,9 +18,8 @@ async function CreateReminder(req, res) {
 
             if (group) {
 
-                // const indSeparateur = datetime.indexOf('T');
-                // datetime[indSeparateur] = " ";
-                var formatedDatetime = datetime
+                var formatedDatetime = datetime;
+                formatedDatetime = formatedDatetime.replace('T',' ');
                 formatedDatetime = formatedDatetime.concat(":00");           
                 const newReminder = await prisma.reminder.create({
                     data: {

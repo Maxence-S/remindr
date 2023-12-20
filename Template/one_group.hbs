@@ -26,33 +26,14 @@
     <br>
     <h2>Rappels</h2>
     <div class="container">
-
-        <div class="Groupes" style="border: 2px solid #40d812;">
-            <div class="titre">Faire les courses </div>
-            <div class="assigné"> Assigner au groupe 1 <br><br></div>
-            <div class="date">Date: 12/14/23</div>
-            <div class="heure">Heure début : 10h00</div>
-            <div class="duree">Durée estimée : 1 heure</div>
-            <div class="description">Description : <br>Acheter des produits alimentaires et ménagers</div>
+        {{#Reminders}}
+        <div class="Groupes" style="border: 2px solid {{Color}};">
+            <div class="titre"<strong>{{Name}}</strong></div>
+            <br>
+            <div class="date"><strong>Date d'écheance:</strong> {{DueDate}}</div>
+            <div class="description"><strong>Description :</strong> {{Description}}</div>
         </div>
-
-        <div class="Groupes" style="border: 2px solid #1247d8;">
-            <div class="titre">Rendez-vous chez le médecin </div>
-            <div class="assigné"> Assigner au groupe 1 <br><br></div>
-            <div class="date">Date: 12/14/23</div>
-            <div class="heure">Heure début : 14h45</div>
-            <div class="duree">Durée estimée : 30 minutes</div>
-            <div class="description">Description : <br>Consultation médicale pour un suivi de santé</div>
-        </div>
-
-        <div class="Groupes" style="border: 2px solid #d8c412;">
-            <div class="titre">Nettoyer la chambre</div>
-            <div class="assigné"> Assigner au groupe 1 <br><br></div>
-            <div class="date">Date: 12/15/23</div>
-            <div class="heure">Heure début : 11h00</div>
-            <div class="duree">Durée estimée : 40 minutes</div>
-            <div class="description">Description : <br>Ranger et nettoyer la chambre</div>
-        </div>
+        {{/Reminders}}
 
     </div>
     <div class="modal" id="ticketModal">
