@@ -6,6 +6,7 @@ import { RegisterMid, LoginMid } from '../Middlewares/login_register.js';
 import { UserConnected } from '../Middlewares/isConnected.js';
 import { CreateReminder } from '../Middlewares/reminder_middleware.js';
 
+
 const prisma = new PrismaClient()
 
 
@@ -76,15 +77,10 @@ function TryLogin(req, res) {
     .catch((error) => {
       console.log(error);
 
-      if (error.code === 1) {
-        // Formulaire incomplet
-      }
-      else if (error.code === 2) {
-        // Utilisateur non trouvé
-      }
-      else if (error.code === 3) {
-        // Mot de passe incorrect
-      }
+      // Envoyer l'erreur au client en utilisant JavaScript
+      res.send(
+        `<script>alert("${error.message}"); window.location.href = '/';</script>`
+      );
 
     })
 }
@@ -99,18 +95,13 @@ function TryRegister(req, res) {
     })
     .catch((error) => {
       console.log(error);
+    
+    // Envoyer l'erreur au client en utilisant JavaScript
+    res.send(
+      `<script>alert("${error.message}"); window.location.href = '/register.html';</script>`
+    );
 
-      if (error.code === 1) {
-        // Formulaire incomplet
-      }
-      else if (error.code === 2) {
-        // Adresse email déjà utilisée
-      }
-      else if (error.code === 3) {
-        // Confirmation du mot de passe incorrect
-      }
-
-    })
+  })
 }
 
 //Fonction permettant d'ajouter un rappel
@@ -121,16 +112,9 @@ function TryAddReminder(req, res) {
     })
     .catch((error) => {
       console.log(error);
-
-      if (error.code === 1) {
-        // Utilisateur non connecté
-      }
-      else if (error.code === 2) {
-        // Erreur avec le groupe
-      }
-      else if (error.code === 3) {
-        // Erreur à la création du rappel
-      }
+      res.send(
+        `<script>alert("${error.message}"); window.location.href = '/';</script>`
+      );
     })
 }
 

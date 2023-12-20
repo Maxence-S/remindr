@@ -79,21 +79,9 @@ function TryAddGroup(req, res) {
         })
         .catch((error) => {
             console.log(error);
-
-            if (error.code === 1) {
-                // Formulaire incomplet
-            }
-            else if (error.code === 2) {
-                // Utilisateur non connecté
-                res.redirect('/');
-            }
-            else if (error.code === 3) {
-                // Groupe déjà existant
-            }
-            else if (error.code === 4) {
-                // Erreur avec le groupe ou l'ajout du créateur dans le groupe
-            }
-
+            res.send(
+                `<script>alert("${error.message}"); window.location.href = '/groups';</script>`
+              );
         })
 }
 
@@ -105,20 +93,9 @@ function TryAddUserInGroup(req, res) {
         })
         .catch((error) => {
             console.log(error);
-
-            if (error.code === 1) {
-                // Formulaire incomplet
-            }
-            else if (error.code === 2) {
-                // Utilisateur non connecté
-                res.redirect('/');
-            }
-            else if (error.code === 3) {
-                // Utilisateur inexistant
-            }
-            else if (error.code === 4) {
-                // Erreur avec le groupe
-            }
+            res.send(
+                `<script>alert("${error.message}"); window.location.href = '/groups';</script>`
+              );
         })
 }
 
