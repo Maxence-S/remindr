@@ -3,7 +3,53 @@ import { CustomError } from '../Services/utils.js';
 
 const prisma = new PrismaClient()
 
-async function CreateReminder(req,res)
-{
-    
+async function CreateReminder(req, res) {
+    try {
+        const { title, datetime, description, color, NameGroup } = req.body
+
+        if (!req.session.user) {
+            throw new CustomError(1, 'Utilisateur non connecté');
+        }
+
+        else {
+            const group = await prisma.groups.findUnique({
+                where: { name: NameGroup },
+            });
+
+            if (group) {
+
+                // const indSeparateur = datetime.indexOf('T');
+                // datetime[indSeparateur] = " ";
+                var formatedDatetime = datetime
+                formatedDatetime = formatedDatetime.concat(":00");           
+                const newReminder = await prisma.reminder.create({
+                    data: {
+                        GroupId: group.G_id,
+                        Name: title,
+                        Description: description,
+                        DueDate: formatedDatetime,
+                        Color: color
+                    }
+
+                });
+
+                if (newReminder) {
+                    return group;
+                }
+                else {
+                    throw new CustomError(3, 'Erreur à la création du rappel.');
+                }
+            }
+            else {
+                throw new CustomError(2, 'Erreur avec le groupe.');
+            }
+        }
+    }
+    catch (error) {
+        throw error;
+    }
+
+
 }
+
+export { CreateReminder }

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
-import { GetLoginPage,GetRegisterPage, GetDashboardPage, GetRemindersPage, TryLogin,TryRegister, TryAddGroup, TryAddUserInGroup, Logout } from '../Controllers/appController.js';
+import { GetLoginPage, GetRegisterPage, GetDashboardPage, GetRemindersPage, TryLogin, TryRegister, TryAddReminder, Logout } from '../Controllers/appController.js';
+import { TryAddGroup, TryAddUserInGroup } from '../Controllers/groupsController.js';
 import { urlencodedParser } from '../Middlewares/bodyparser.js';
 
 const appRouter = Router();
@@ -25,9 +26,11 @@ appRouter.post('/login',urlencodedParser,TryLogin)
 
 appRouter.post('/register',urlencodedParser,TryRegister)
 
-appRouter.post('/addGroup',urlencodedParser,TryAddGroup)
+appRouter.post('/addGroup',urlencodedParser,TryAddGroup)        //Récupère le formulaire d'ajout d'un groupe
 
-appRouter.post('/addUser', urlencodedParser,TryAddUserInGroup)
+appRouter.post('/addUser', urlencodedParser,TryAddUserInGroup)  //Récupère le formulaire d'ajout d'un utilisateur dans un groupe
+
+appRouter.post('/addReminder', urlencodedParser, TryAddReminder)
 
 //Permet la fin de session et la déconnexion
 appRouter.get('/logout',Logout)

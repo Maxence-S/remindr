@@ -34,7 +34,7 @@ async function AddGroup(req, res) {
                 const idUser = req.session.user.U_id
                 const idGroup = newGroup.G_id
 
-                await prisma.groups.update({
+                const groupUpdated = await prisma.groups.update({
                     where: { G_id: idGroup },
                     data: {
                         Users: {
@@ -42,6 +42,8 @@ async function AddGroup(req, res) {
                         },
                     },
                 });
+
+                return groupUpdated;
             }
             else {
                 throw new CustomError(4, 'Erreur dans la création du groupe, ajout de l\'utilisateur impossible');
@@ -80,22 +82,35 @@ async function AddUserInGroup(req, res) {
             });
 
             // Récupération du groupe
-            const groupName = await prisma.groups.findUnique({
-                where : { email: group_name },
+            const group = await prisma.groups.findUnique({
+                where : { name: group_name },
+                include : { Users: true},
             });
 
             if (existingUser)
             {
-                if (groupName)
+                if (group)
                 {
-                    await prisma.groups.update({
-                        where: { name: group_name },
-                        data: {
-                            Users: {
-                                connect: { email: email_user },
+                    const IsInGroup = group.Users.some(groupUser => groupUser.email === email_user);
+                    console.log(IsInGroup);
+                    if (IsInGroup)
+                    {
+                        throw new CustomError(5, 'Utilisateur déjà dans le groupe.')
+                    }
+                    else
+                    {
+                        await prisma.groups.update({
+                            where: { name: group_name },
+                            data: {
+                                Users: {
+                                    connect: { email: email_user },
+                                },
                             },
-                        },
-                    });
+                        });
+
+                        return group;
+                    }
+
                 }
                 else
                 {
@@ -111,11 +126,67 @@ async function AddUserInGroup(req, res) {
             throw new CustomError(1, 'Formulaire incomplet.')
         }
     }
-    catch {
+    catch (error) {
+        throw error;
+    }
+}
 
+async function GroupControlAccess(req,res)
+{
+    try {
+        const NameGroup = req.params.groupName;
+
+        const Group = await prisma.groups.findUnique({
+            where : { name: NameGroup },
+        });
+
+        if (Group)
+        {
+            const email = req.session.user.email;
+
+            const User = await prisma.user.findUnique({
+                where: { email },
+                include: {
+                  U_Groups: { select: { name: true } }
+                }
+              });
+            const groupsOfuser = User.U_Groups.map(Groups => Groups.name);
+
+            var AccessToGroup;
+            groupsOfuser.forEach(Usergroup => {
+                
+                if (Usergroup == Group.name)
+                {
+                    AccessToGroup = Group;
+                }
+
+            });
+
+            if (AccessToGroup)
+            {
+                return;
+            }
+            else
+            {
+                throw new CustomError(2,'Accès interdit.')
+            }
+
+
+
+        }
+        else
+        {
+            throw new CustomError(1,'Groupe inexistant.')
+        }
+    }
+    catch (error) {
+        throw error;
     }
 }
 
 
-export const AddGroupMid = AddGroup
-export const AddUserMid = AddUserInGroup
+export {
+    AddGroup,
+    AddUserInGroup,
+    GroupControlAccess
+}

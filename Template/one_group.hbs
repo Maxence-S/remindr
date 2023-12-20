@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Groupes</title>
+    <title>Groupe : {{NameGroup}}</title>
     <link rel="stylesheet" href="/style/index_style.css">
 </head>
 
@@ -13,8 +13,9 @@
     </div>
 
 
-    <h1>Rappel Groupe 1</h1>
+    <h1>{{NameGroup}}</h1>
 
+    <br>
     <div class="buttondiv">
         <button id="creerTicketBtn">Créer un rappel</button>
     </div>
@@ -22,6 +23,8 @@
         <button id="addUserBtn">Ajouter un utilisateur</button>
     </div>
 
+    <br>
+    <h2>Rappels</h2>
     <div class="container">
 
         <div class="Groupes" style="border: 2px solid #40d812;">
@@ -58,7 +61,7 @@
             <span class="close" id="closeModal_Ticket">&times;</span>
             <h2>Créer un nouveau rappel</h2>
             <br>
-            <form action="/createReminder" method="post" class="formulaire" id="formulaire">
+            <form action="/addReminder" method="post" class="formulaire" id="formulaire">
                 Titre :<br>
                 <input type="text" name="title" placeholder="Travail à rendre" class="titre_pop" required><br><br>
                 Date d'écheance :<br>
@@ -66,10 +69,10 @@
                 <!-- Heure d'écheance :<br>
                 <input type="time" name="time" class="heure_pop" required><br><br> -->
                 Description :<br>
-                <input type="text" name="desciption" placeholder="Rendu du projet." class="titre_pop" required><br><br>
+                <input type="text" name="description" placeholder="Rendu du projet." class="titre_pop" required><br><br>
                 Couleur :<br>
                 <input type="color" name="color" class="form-elem" required><br><br>
-                <input type="hidden" name="groupName" value="">
+                <input type="hidden" name="NameGroup" value="{{NameGroup}}">
                 <input type="submit" value="créer" id="validButton">
             </form>
         </div>
@@ -83,7 +86,7 @@
             <form action="/addUser" method="post" class="formulaire">
                 Email:<br>
                 <input type="email" name="email" placeholder="user@mail.com" class="email_pop" required><br><br>
-                <input type="hidden" name="groupName" value="">
+                <input type="hidden" name="NameGroup" value="{{NameGroup}}">
                 <input type="submit" value="ajouter" id="validButton">
             </form>
         </div>

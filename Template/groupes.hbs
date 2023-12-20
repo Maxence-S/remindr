@@ -15,67 +15,24 @@
 
     <h1>Vos groupes</h1>
 
+    <br>
     <div class="buttondiv">
         <button id="creerGroupBtn">Créer un groupe</button>
     </div>
-
+    <br>
+    
     <div class="container">
+        {{#each groupsOfuser}}
         <div class="Groupes">
             <div class="titre">
-                <h3>Groupe 1</h3>
+                <h3>{{this}}</h3>
             </div>
-            <div class="description"> C'est le groupe 1</div>
+            {{!-- <div class="description"> C'est le groupe 1</div> --}}
             <br>
-            <button onclick="window.location.href = 'groups/1';">Rappel Groupe 1</button>
+            <button onclick="window.location.href = 'groups/{{this}}';">Accéder à la page</button>
         </div>
-        <div class="Groupes">
-            <div class="titre">
-                <h3>Groupe 2</h3>
-            </div>
-            <div class="description"> C'est le groupe 2</div>
-            <br>
-            <button onclick="window.location.href = 'groups/2';">Rappel Groupe 2</button>
-        </div>
-        <div class="Groupes">
-            <div class="titre">
-                <h3>Groupe 3</h3>
-            </div>
-            <div class="description"> C'est le groupe 3</div>
-            <br>
-            <button onclick="window.location.href = 'groups/3';">Rappel Groupe 3</button>
-        </div>
-        <div class="Groupes">
-            <div class="titre">
-                <h3>Groupe 4</h3>
-            </div>
-            <div class="description"> C'est le groupe 4</div>
-            <br>
-            <button onclick="window.location.href = 'groups/4';">Rappel Groupe 4</button>
-        </div>
-        <div class="Groupes">
-            <div class="titre">
-                <h3>Groupe 5</h3>
-            </div>
-            <div class="description"> C'est le groupe 5</div>
-            <br>
-            <button onclick="window.location.href = 'groups/5';">Rappel Groupe 5</button>
-        </div>
-        <div class="Groupes">
-            <div class="titre">
-                <h3>Groupe 6</h3>
-            </div>
-            <div class="description"> C'est le groupe 6</div>
-            <br>
-            <button onclick="window.location.href = 'groups/6';">Rappel Groupe 6</button>
-        </div>
-        <div class="Groupes">
-            <div class="titre">
-                <h3>Groupe 7</h3>
-            </div>
-            <div class="description"> C'est le groupe 7</div>
-            <br>
-            <button onclick="window.location.href = 'groupes/7';">Rappel Groupe 7</button>
-        </div>
+        {{/each}}
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function () {
@@ -92,7 +49,7 @@
             <form action="/addGroup" method="post" class="formulaire">
                 Nom du groupe :<br>
                 <input type="text" name="groupName" placeholder="MonGroupe" class="titre_pop" required><br><br>
-            <input type="submit" value="ajouter" id="validButton">
+                <input type="submit" value="ajouter" id="validButton">
             </form>
         </div>
     </div>
