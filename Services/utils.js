@@ -9,6 +9,7 @@ const getDirName = function (moduleUrl) {
     return path.dirname(__dirname)
 }
 
+//Classe d'erreur personnalisée
 class CustomError extends Error {
     constructor(code, message) {
         super(message);

@@ -4,7 +4,7 @@ import { GetLoginPage, GetRegisterPage, GetDashboardPage, GetRemindersPage, TryL
 import { TryAddGroup, TryAddUserInGroup } from '../Controllers/groupsController.js';
 import { urlencodedParser } from '../Middlewares/bodyparser.js';
 
-const appRouter = Router();
+const appRouter = Router(); //Initialisation du routeur
 
 
 //Routes menant aux pages connexion et inscription
@@ -22,15 +22,16 @@ appRouter.get('/reminders', GetRemindersPage)   //Page listant les rappels de l'
 
 
 //Envoi des formulaires (inscription, connexion, création de groupe ou de rappel)
-appRouter.post('/login',urlencodedParser,TryLogin)
 
-appRouter.post('/register',urlencodedParser,TryRegister)
+appRouter.post('/login',urlencodedParser,TryLogin)                  //Récupère le formulaire de connexion d'un utilisateur
 
-appRouter.post('/addGroup',urlencodedParser,TryAddGroup)        //Récupère le formulaire d'ajout d'un groupe
+appRouter.post('/register',urlencodedParser,TryRegister)            //Récupère le formulaire d'ajout d'un utilisateur
 
-appRouter.post('/addUser', urlencodedParser,TryAddUserInGroup)  //Récupère le formulaire d'ajout d'un utilisateur dans un groupe
+appRouter.post('/addGroup',urlencodedParser,TryAddGroup)            //Récupère le formulaire d'ajout d'un groupe
 
-appRouter.post('/addReminder', urlencodedParser, TryAddReminder)
+appRouter.post('/addUser', urlencodedParser,TryAddUserInGroup)      //Récupère le formulaire d'ajout d'un utilisateur dans un groupe
+
+appRouter.post('/addReminder', urlencodedParser, TryAddReminder)    //Récupère le formulaire de création d'un rappel
 
 //Permet la fin de session et la déconnexion
 appRouter.get('/logout',Logout)

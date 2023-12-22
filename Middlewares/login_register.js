@@ -4,6 +4,7 @@ import { CustomError } from '../Services/utils.js';
 
 const prisma = new PrismaClient()
 
+//Fonction permettant de vérifier si les identifiants du formulaires correspondent à un utilisateur enregistré.
 async function Login(req, res) {
     try {
         const user_email = req.body.email;
@@ -41,6 +42,7 @@ async function Login(req, res) {
     }
 }
 
+//Fonction permettant de créer un nouvel utilisateur
 async function Register(req, res) {
     try {
         const u_pseudo = req.body.pseudo;

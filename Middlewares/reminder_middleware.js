@@ -3,6 +3,8 @@ import { CustomError } from '../Services/utils.js';
 
 const prisma = new PrismaClient()
 
+
+//Fonction permettant de créer un nouveau rappel dans un groupe
 async function CreateReminder(req, res) {
     try {
         const { title, datetime, description, color, NameGroup } = req.body

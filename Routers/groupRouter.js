@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { GetAllGroupsPage, GetSingleGroupPage } from '../Controllers/groupsController.js';
 
-const groupRouter = Router();
+const groupRouter = Router();  //Initialisation du routeur
 
 
 groupRouter.get('/', GetAllGroupsPage)              //Page listant les groupes de l'utilisateur

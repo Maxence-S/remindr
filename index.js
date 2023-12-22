@@ -1,10 +1,7 @@
 //Récupération du routeur principal
 import appRouter from './Routers/appRouter.js'
 import groupRouter from './Routers/groupRouter.js';
-
 import { getDirName } from './Services/utils.js';
-
-
 import Express  from 'express';
 import { resolve } from 'path';
 import session from 'express-session';
@@ -17,6 +14,7 @@ import { PrismaClient } from '@prisma/client';
 const app = Express();
 const port = 3010;
 
+//Initialisation du répertoire 'public' contenant le style, les images et l'entête.
 app.use(Express.static('public'))
 
 //Initialisation Handlebars
@@ -31,15 +29,18 @@ app.set('views', resolve(getDirName(import.meta.url), 'remindr/Template'));
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
+
 //Initialisation prisma
 const prisma = new PrismaClient()
 
+//Initialisation de la session
 app.use(session({
   secret: 'your-secret-key',
   resave: false,
   saveUninitialized: true
 }));
 
+//Mise en place des routeurs
 app.use(appRouter);
 app.use('/groups',groupRouter);
 

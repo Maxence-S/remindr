@@ -34,10 +34,10 @@ function GetAllGroupsPage(req, res) {
 
 //Fonction permettant l'accès à la page d'un groupe
 function GetSingleGroupPage(req, res) {
-    UserConnected(req, res)
+    UserConnected(req, res)         //Vérifie si l'utilisateur est connecté
         .then((user) => {
 
-            GroupControlAccess(req, res)
+            GroupControlAccess(req, res)    //Vérifie que l'utilisateur ait accès au groupe
                 .then(async () => {
                     const NameGroup = req.params.groupName
 
@@ -73,7 +73,7 @@ function GetSingleGroupPage(req, res) {
 //Fonction permettant de créer un groupe
 function TryAddGroup(req, res) {
 
-    AddGroup(req, res)
+    AddGroup(req, res)  //Middleware permettant de créer un groupe
         .then((newGroup) => {
             res.redirect('/groups/' + newGroup.name);
         })
@@ -87,7 +87,7 @@ function TryAddGroup(req, res) {
 
 //Fonction permettant d'ajouter un utilisateur dans un groupe
 function TryAddUserInGroup(req, res) {
-    AddUserInGroup(req, res)
+    AddUserInGroup(req, res)        //Middleware permettant d'ajouter un utilisateur dans un groupe
         .then((groupUpdated) => {
             res.redirect('/groups/' + groupUpdated.name);
         })

@@ -3,6 +3,7 @@ import { CustomError } from '../Services/utils.js';
 
 const prisma = new PrismaClient()
 
+//Fonction permettant de créer un groupe
 async function AddGroup(req, res) {
     try {
         const group_name = req.body.groupName;
@@ -65,8 +66,8 @@ async function AddGroup(req, res) {
     }
 }
 
-
-async function AddUserInGroup(req, res) {
+//Fonction permettant d'ajouter un utilisateur dans un groupe
+async function AddUserInGroup(req, res) {   
     try {
         const email_user = req.body.email;
         const group_name = req.body.NameGroup;
@@ -87,9 +88,9 @@ async function AddUserInGroup(req, res) {
                 include: { Users: true },
             });
 
-            if (existingUser) {
+            if (existingUser) {     //Si l'utilisateur existe, on va pouvoir l'ajouter
                 if (group) {
-                    const IsInGroup = group.Users.some(groupUser => groupUser.email === email_user);
+                    const IsInGroup = group.Users.some(groupUser => groupUser.email === email_user);    //Vérifie que celui-ci n'est pas déjà dans le groupe
                     console.log(IsInGroup);
                     if (IsInGroup) {
                         throw new CustomError(5, 'Utilisateur déjà dans le groupe.')
@@ -125,6 +126,7 @@ async function AddUserInGroup(req, res) {
     }
 }
 
+//Fonction permettant de vérifier qu'un utilisateur ait l'autorisation d'accéder à un groupe
 async function GroupControlAccess(req, res) {
     try {
         const NameGroup = req.params.groupName;
@@ -145,7 +147,7 @@ async function GroupControlAccess(req, res) {
             const groupsOfuser = User.U_Groups.map(Groups => Groups.name);
 
             var AccessToGroup;
-            groupsOfuser.forEach(Usergroup => {
+            groupsOfuser.forEach(Usergroup => {     //Vérifie chaque groupe de l'utilisateur
 
                 if (Usergroup == Group.name) {
                     AccessToGroup = Group;
@@ -154,7 +156,7 @@ async function GroupControlAccess(req, res) {
             });
 
             if (AccessToGroup) {
-                return;
+                return;         //Si le groupe a été trouvé parmis ceux de l'utilisateur, on return pour passer à la suite
             }
             else {
                 throw new CustomError(2, 'Accès interdit.')
@@ -172,6 +174,7 @@ async function GroupControlAccess(req, res) {
     }
 }
 
+// EXPORTS //
 
 export {
     AddGroup,

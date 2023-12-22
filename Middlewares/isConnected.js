@@ -1,5 +1,6 @@
 import { CustomError } from '../Services/utils.js';
 
+//Fonction permettant de vérifier qu'un utilisateur est connecté.
 async function UserConnected(req, res) {
     try {
         if (req.session.user) {
